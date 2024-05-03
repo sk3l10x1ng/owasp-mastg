@@ -3,20 +3,25 @@ title: Intercepting Flutter HTTP Traffic
 platform: ios
 ---
 
-Flutter is an open-source UI software development kit (SDK) created by Google. It is used for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses Dart, which is not proxy-aware and uses its own certificate store. The application doesn't take proxy configuration from the system and send the data directly to the server. Due to this, it is not possible to intercept the request using the BurpSuite or any MITM tools.
+Flutter is an open-source UI software development kit (SDK) created by Google. It is used for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses Dart, which is not proxy-aware and uses its own certificate store. The application doesn't use the proxy configuration of the system and sends the data directly to the server. Connections are verified against built-in certificates, so any certificates installed on the system are simply ignored. Due to this, it is not possible to intercept HTTPS requests as the certificate of the proxy will never be trusted.
 
+In order to intercept Flutter HTTPS traffic we need to deal with two problems:
 
-**How does re-flutter method differs from other techniques ?**
+- Make sure the traffic is sent to the proxy
+- Disable the TLS verification of any HTTPS connection
 
-There are alternative methods for intercepting traffic, such as creating a [WIFI hotspot and utilizing the openvpn approach](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/). However, these techniques require some configuration. By employing the re-flutter command-line tool, the application can be patched effortlessly without the need for any setup.
+There are generally two approaches to this: reFlutter and Frida.
+
+- **reFlutter**: This tool creates a modified version of libFlutter.so which is then repackaged into the APK. It configures the internal libraries to use a specified proxy and disable the TLS verification
+- **Frida**: The [disable-flutter-tls.js script](https://github.com/NVISOsecurity/disable-flutter-tls-verification) can dynamically remove the TLS verification without the need for repackaging. As it doesn't modify the proxy configuration, additional steps are needed (e.g. ProxyDroid, DNS, iptables, ...)
 
 ## Intercepting Traffic using re-fultter
 
 1. Patch the app to enable traffic interception.
+Run the command to patch the app and select the option **Traffic monitoring and interception** and then enter the IP of the machine on which the interception proxy is running.
 
-Run the command to patch the app and select the option **Traffic monitoring and interception** and then the IP of the machine which the interception proxy is running.
-```
-$ reflutter demo.apk
+```plaintext
+$ reflutter demo.ipa
 
 Choose an option:
 
@@ -35,30 +40,31 @@ This will create a **release.RE.ipa** file in the output folder.
 
 3. Install the signed patched app on the mobile device.
 
-4. Configure the interception proxy.For example, in Burp-suite:
-  - Under Proxy -> Proxy settings -> Add new Proxy setting.
-  - Bind listening Port to 8083.
-  - Select Bind to address to All interfaces.
-  - Request Handling -> support for invisible proxying.
+4. Configure the interception proxy. For example, in Burp-suite:
+
+- Under Proxy -> Proxy settings -> Add new Proxy setting.
+- Bind listening Port to `8083`.
+- Select `Bind to address` to `All interfaces`.
+- Request Handling -> support for invisible proxying.
 
 5. Open the app and start intercepting traffic.
-
 
 ## Intercepting Traffic using Frida
 
 1. Configure [WIFI hotspot or openVPN method](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/) to redirect requests to Burp Suite.
 
-2. Install the [flutter app](../../apps/ios/MASTG-APP-0025.md) on the mobile device.
+2. Install the [app](../../apps/ios/MASTG-APP-0025.md) on the mobile device.
 
-3. Configure the interception proxy.For example, in Burp-suite:
-  - Under Proxy -> Proxy settings -> Add new Proxy setting.
-  - Bind listening Port to 8080.
-  - Select Bind to address to All interfaces.
-  - Request Handling -> support for invisible proxying.
+3. Configure the interception proxy. For example, in Burp-suite:
+
+- Under Proxy -> Proxy settings -> Add new Proxy setting.
+- Bind listening Port to `8080`.
+- Select `Bind to address` to `All interfaces`.
+- Request Handling -> support for invisible proxying.
 
 4. Run the frida script.
 
-```
+```plaintext
 frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
 ```
 
