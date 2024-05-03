@@ -49,3 +49,33 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
   - Request Handling -> support for invisible proxying.
 
 5. Open the app and start intercepting traffic.
+
+
+## Intercepting Traffic using Frida
+
+1. Configure proxyDroid or implement iptables rules to redirect requests to Burp Suite.
+```
+# flush all the previous rules
+$ iptables -t nat -F 
+
+# routing traffic from port80 to burpsuite
+$ iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.1.11:8080 
+
+# routing traffic from port80 to burpsuite
+$ iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.1.11:8080 
+```
+2. Install the [flutter app](../../apps/android/MASTG-APP-0016.md) on the mobile device.
+
+3. Configure the interception proxy.For example, in Burp-suite:
+  - Under Proxy -> Proxy settings -> Add new Proxy setting.
+  - Bind listening Port to 8080.
+  - Select Bind to address to All interfaces.
+  - Request Handling -> support for invisible proxying.
+
+4. Run the frida script.
+
+```
+frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
+```
+
+5. Start intercepting traffic.

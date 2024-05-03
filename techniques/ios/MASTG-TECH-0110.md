@@ -42,3 +42,24 @@ This will create a **release.RE.ipa** file in the output folder.
   - Request Handling -> support for invisible proxying.
 
 5. Open the app and start intercepting traffic.
+
+
+## Intercepting Traffic using Frida
+
+1. Configure [WIFI hotspot or openVPN method](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/) to redirect requests to Burp Suite.
+
+2. Install the [flutter app](../../apps/ios/MASTG-APP-0025.md) on the mobile device.
+
+3. Configure the interception proxy.For example, in Burp-suite:
+  - Under Proxy -> Proxy settings -> Add new Proxy setting.
+  - Bind listening Port to 8080.
+  - Select Bind to address to All interfaces.
+  - Request Handling -> support for invisible proxying.
+
+4. Run the frida script.
+
+```
+frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
+```
+
+5. Start intercepting traffic.
