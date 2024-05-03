@@ -68,4 +68,4 @@ This will create a **release.RE.ipa** file in the output folder.
 frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
 ```
 
-5. Start intercepting traffic.
+5. Start intercepting HTTPS traffic.
