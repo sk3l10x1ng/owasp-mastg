@@ -7,13 +7,13 @@ Flutter is an open-source UI software development kit (SDK) created by Google. I
 
 In order to intercept Flutter HTTPS traffic we need to deal with two problems:
 
-- Make sure the traffic is sent to the proxy
-- Disable the TLS verification of any HTTPS connection
+- Make sure the traffic is sent to the proxy.
+- Disable the TLS verification of any HTTPS connection.
 
-There are generally two approaches to this: reFlutter and Frida.
+There are generally two approaches to this: **reFlutter** and **Frida**.
 
-- **reFlutter**: This tool creates a modified version of `libFlutter.so` which is then repackaged into the APK. It configures the internal libraries to use a specified proxy and disable the TLS verification
-- **Frida**: The [disable-flutter-tls.js script](https://github.com/NVISOsecurity/disable-flutter-tls-verification) can dynamically remove the TLS verification without the need for repackaging. As it doesn't modify the proxy configuration, additional steps are needed (e.g. ProxyDroid, DNS, iptables, ...)
+- **reFlutter**: This tool creates a modified version of `libFlutter.so` which is then repackaged into the APK. It configures the internal libraries to use a specified proxy and disable the TLS verification.
+- **Frida**: The [disable-flutter-tls.js script](https://github.com/NVISOsecurity/disable-flutter-tls-verification) can dynamically remove the TLS verification without the need for repackaging. As it doesn't modify the proxy configuration, additional steps are needed (e.g. ProxyDroid, DNS, iptables, ...).
 
 ## Intercepting Traffic using re-flutter
 
@@ -47,7 +47,7 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
 
 3. Install the signed patched app on the mobile device.
 
-4. Configure the interception proxy. For example, in Burp-suite:
+4. Configure the interception proxy. For example, in Burp:
 
 - Under Proxy -> Proxy settings -> Add new Proxy setting.
 - Bind listening Port to `8083`.
@@ -58,22 +58,22 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
 
 ## Intercepting Traffic using Frida
 
-1. Configure [proxyDroid or implement iptables](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) rules to redirect requests to Burp Suite.
+1. Configure [proxyDroid/iptables](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) rules to redirect requests to Burp.
 
 ```plaintext
 # flush all the previous rules
 $ iptables -t nat -F 
 
-# routing traffic from port80 to burpsuite
+# routing traffic from port 80 to burp
 $ iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.1.11:8080 
 
-# routing traffic from port80 to burpsuite
+# routing traffic from port 443 to burp
 $ iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.1.11:8080 
 ```
 
 2. Install the [app](../../apps/android/MASTG-APP-0016.md) on the mobile device.
 
-3. Configure the interception proxy.For example, in Burp-suite:
+3. Configure the interception proxy.For example, in Burp:
 
 - Under Proxy -> Proxy settings -> Add new Proxy setting.
 - Bind listening Port to `8080`.
