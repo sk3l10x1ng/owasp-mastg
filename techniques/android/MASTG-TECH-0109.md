@@ -58,22 +58,22 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
 
 ## Intercepting Traffic using Frida
 
-1. Configure [proxyDroid/iptables](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) rules to redirect requests to Burp.
+1. Configure [proxyDroid](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) or iptables rules to redirect requests to Burp.
 
 ```plaintext
-# flush all the previous rules
+# Flush all the rules
 $ iptables -t nat -F 
 
-# routing traffic from port 80 to burp
+# Routing traffic from port 80 to burp
 $ iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.1.11:8080 
 
-# routing traffic from port 443 to burp
+# Routing traffic from port 443 to burp
 $ iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.1.11:8080 
 ```
 
 2. Install the [app](../../apps/android/MASTG-APP-0016.md) on the mobile device.
 
-3. Configure the interception proxy.For example, in Burp:
+3. Configure the interception proxy. For example, in Burp:
 
 - Under Proxy -> Proxy settings -> Add new Proxy setting.
 - Bind listening Port to `8080`.
@@ -86,4 +86,4 @@ $ iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.
 frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
 ```
 
-5. Start intercepting HTTPS traffic.
+5. Start intercepting traffic.
