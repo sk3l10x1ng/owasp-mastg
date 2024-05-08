@@ -62,7 +62,7 @@ This will create a **release.RE.ipa** file in the output folder.
 - Select `Bind to address` to `All interfaces`.
 - Request Handling -> support for invisible proxying.
 
-4. Run the frida script.
+4. Run the [disable-flutter-tls.js](../../tools/generic/MASTG-TOOL-0101.md) frida script.
 
 ```plaintext
 frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js

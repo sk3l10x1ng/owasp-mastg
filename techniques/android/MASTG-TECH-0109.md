@@ -81,7 +81,7 @@ $ iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.
 - Select `Bind to address` to `All interfaces`.
 - Request Handling -> support for invisible proxying.
 
-4. Run the frida script.
+4. Run the [disable-flutter-tls.js](../../tools/generic/MASTG-TOOL-0101.md) frida script.
 
 ```plaintext
 frida -U -f eu.nviso.flutterPinning -l disable-flutter-tls.js
