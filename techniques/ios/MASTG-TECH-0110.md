@@ -5,7 +5,7 @@ platform: ios
 
 Flutter is an open-source UI software development kit (SDK) created by Google. It is used for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses Dart, which is not proxy-aware and uses its own certificate store. The application doesn't use the proxy configuration of the system and sends the data directly to the server. Connections are verified against built-in certificates, so any certificates installed on the system are simply ignored. Due to this, it is not possible to intercept HTTPS requests as the certificate of the proxy will never be trusted.
 
-In order to intercept Flutter HTTPS traffic we need to deal with two problems:
+In order to intercept Flutter HTTPS traffic, we need to deal with two problems:
 
 - Make sure the traffic is sent to the proxy.
 - Disable the TLS verification of any HTTPS connection.
@@ -36,7 +36,7 @@ Please enter your BurpSuite IP: 192.168.29.216
 
 This will create a **release.RE.ipa** file in the output folder.
 
-2. [Sign](../../techniques/ios/MASTG-TECH-0092.md) the patched **release.RE.ipa** with the Apple certificates. This will create a singed ".ipa" file in the output folder.
+2. [Sign](../../techniques/ios/MASTG-TECH-0092.md) the patched **release.RE.ipa** with the Apple certificates. This will create a signed ".ipa" file in the output folder.
 
 3. Install the signed patched app on the mobile device.
 
@@ -51,7 +51,7 @@ This will create a **release.RE.ipa** file in the output folder.
 
 ## Intercepting Traffic using Frida
 
-1. Configure using [WIFI hotspot or openVPN method](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/) to redirect requests to Burp Suite.
+1. Configure using [WIFI hotspot / openVPN method](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/) to redirect requests to Burp.
 
 2. Install the [app](../../apps/ios/MASTG-APP-0025.md) on the mobile device.
 

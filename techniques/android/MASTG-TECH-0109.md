@@ -5,7 +5,7 @@ platform: android
 
 Flutter is an open-source UI software development kit (SDK) created by Google. It is used for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses Dart, which is not proxy-aware and uses its own certificate store. The application doesn't use the proxy configuration of the system and sends the data directly to the server. Connections are verified against built-in certificates, so any certificates installed on the system are simply ignored. Due to this, it is not possible to intercept HTTPS requests as the certificate of the proxy will never be trusted.
 
-In order to intercept Flutter HTTPS traffic we need to deal with two problems:
+In order to intercept Flutter HTTPS traffic, we need to deal with two problems:
 
 - Make sure the traffic is sent to the proxy.
 - Disable the TLS verification of any HTTPS connection.
@@ -60,6 +60,7 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
 
 1. Configure [proxyDroid](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) or iptables rules to redirect requests to Burp.
 
+Execute the command to configure iptables in order to redirect the incoming requests from the application to Burp.
 ```plaintext
 # Flush all the rules
 $ iptables -t nat -F 
