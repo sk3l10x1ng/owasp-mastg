@@ -1,5 +1,5 @@
 ---
-title: disable-flutter-tls-verification
+title: Disable-flutter-tls-verification
 platform: android
 source: https://github.com/NVISOsecurity/disable-flutter-tls-verification/blob/main/test_app/pinning.apk
 ---
