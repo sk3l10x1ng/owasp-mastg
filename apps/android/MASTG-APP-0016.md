@@ -4,4 +4,4 @@ platform: android
 source: https://github.com/NVISOsecurity/disable-flutter-tls-verification/blob/main/test_app/pinning.apk
 ---
 
-An android application designed to verify the [frida script](../../tools/generic/MASTG-TOOL-0101.md) , which disables Flutter's TLS verification, utilizing a simple Flutter application featuring three buttons: HTTP, HTTPS, and HTTPS (Pinned).
+An android application designed to verify the [frida script](../../tools/generic/MASTG-TOOL-0101.md), which disables Flutter's TLS verification.
