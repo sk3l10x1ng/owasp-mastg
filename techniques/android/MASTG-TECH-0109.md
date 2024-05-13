@@ -56,7 +56,7 @@ This will create a **release.RE-aligned-debugSigned.apk** file in the output fol
 
 5. Open the app and start intercepting traffic.
 
-## Intercepting Traffic using Frida
+## Intercepting Traffic using ProxyDroid / iptables with Frida
 
 1. Configure [proxyDroid](https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/) or iptables rules to redirect requests to Burp.
 

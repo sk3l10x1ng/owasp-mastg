@@ -49,7 +49,7 @@ This will create a **release.RE.ipa** file in the output folder.
 
 5. Open the app and start intercepting traffic.
 
-## Intercepting Traffic using Frida
+## Intercepting Traffic using WIFI Hotspot / openVPN with Frida
 
 1. Configure using [WIFI hotspot / openVPN](https://blog.nviso.eu/2020/06/12/intercepting-flutter-traffic-on-ios/) method to redirect requests to Burp.
 
