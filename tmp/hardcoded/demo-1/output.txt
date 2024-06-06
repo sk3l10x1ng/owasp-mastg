@@ -1,0 +1,13 @@
+                   
+                   
+┌─────────────────┐
+│ 2 Code Findings │
+└─────────────────┘
+                        
+    hardcoded_keys.swift
+    ❯❱ rules.hardcoded-keys
+          The application appears to utilize hardcoded-encryption keys in the code
+                                                                                  
+            6┆ let keyString = "this is a constant string"
+            ⋮┆----------------------------------------
+            9┆ _ = try AES(key: keyString, iv: ivString)
