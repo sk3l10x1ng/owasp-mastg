@@ -11,16 +11,14 @@ mappings:
 refs:
 - https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf
 - https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf
-draft:
-  description: e.g. 1024-bit RSA keys, 128-bit AES keys, 160-bit ECDSA keys, 80-bit
-    symmetric keys
-  topics:
-  - insufficient Key Length
+- https://developer.android.com/privacy-and-security/risks/weak-prng
 ---
 
 ## Overview
 
 The key size, also known as the key length, is dependent on the number of bits. Encryption algorithms that utilize insufficient key sizes are vulnerable to attacks, while longer keys typically entail more intricate encryption.
+
+Weak pseudorandom number generator (PRNG) can undermine cryptographic security by generating predictable or low-entropy keys. This reduces the effectiveness of the key length and makes it easier for attackers to guess or reproduce keys. Weak PRNGs can also produce repeated patterns, leading to further vulnerabilities. Ensuring the use of strong, cryptographically secure PRNGs with high-entropy seeding is essential for robust key security.
 
 ## Impact
 
@@ -46,6 +44,6 @@ Weak PRNG can introduce vulnerabilities in cryptographic key generation by provi
 
 ## Mitigations
 
-- A secure pseudorandom number generator ([PRNG](https://developer.android.com/privacy-and-security/risks/weak-prng)) should be used to avoid predictable keys. 
+- A secure pseudorandom number generator ([PRNG](https://developer.android.com/privacy-and-security/risks/weak-prng)) should be used to avoid predictable keys.
 - The key length should meet industry standards as specified in [NIST Special Publication 800-131A](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf) to provide long-term protection.
 - Algorithms and cryptographic schemes used in third-party libraries must be verified to ensure that they are not deprecated and used properly.

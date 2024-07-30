@@ -15,7 +15,7 @@ test: MASTG-TEST-0206
 
 Let's run our semgrep rule against the sample code.
 
-{{ ../../../rules/mastg-android-weak-crypto-key-generation.yml }}
+{{ ../../../../rules/mastg-android-weak-crypto-key-generation.yml }}
 
 {{ run.sh }}
 
