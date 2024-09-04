@@ -176,7 +176,69 @@ Realm realm = Realm.getInstance(config);
 
 ```
 
-If the database _is not_ encrypted, you should be able to obtain the data. If the database _is_ encrypted, determine whether the key is hard-coded in the source or resources and whether it is stored unprotected in shared preferences or some other location.
+Access to the data depends on the encryption: unencrypted databases are easily accessible, while encrypted ones require investigation into how the key is managed - whether it's hardcoded or stored unencrypted in an insecure location such as shared preferences, or securely in the platform's KeyStore (which is best practice).
+
+However, if an attacker has sufficient access to the device (e.g. root access) or can repackage the app, they can still retrieve encryption keys at runtime using tools like Frida. The following Frida script demonstrates how to intercept the Realm encryption key and access the contents of the encrypted database.
+
+```javascript
+
+'use strict';
+
+function modulus(x, n){
+    return ((x % n) + n) % n;
+}
+
+function bytesToHex(bytes) {
+    for (var hex = [], i = 0; i < bytes.length; i++) { hex.push(((bytes[i] >>> 4) & 0xF).toString(16).toUpperCase());
+        hex.push((bytes[i] & 0xF).toString(16).toUpperCase());
+    }
+    return hex.join("");
+}
+
+function b2s(array) {
+    var result = "";
+    for (var i = 0; i < array.length; i++) {
+        result += String.fromCharCode(modulus(array[i], 256));
+    }
+    return result;
+}
+
+// Main Modulus and function.
+
+if(Java.available){
+    console.log("Java is available");
+    console.log("[+] Android Device.. Hooking Realm Configuration.");
+
+    Java.perform(function(){
+        var RealmConfiguration = Java.use('io.realm.RealmConfiguration');
+        if(RealmConfiguration){
+            console.log("[++] Realm Configuration is available");
+            Java.choose("io.realm.Realm", {
+                onMatch: function(instance)
+                {
+                    console.log("[==] Opened Realm Database...Obtaining the key...")
+                    console.log(instance);
+                    console.log(instance.getPath());
+                    console.log(instance.getVersion());
+                    var encryption_key = instance.getConfiguration().getEncryptionKey();
+                    console.log(encryption_key);
+                    console.log("Length of the key: " + encryption_key.length); 
+                    console.log("Decryption Key:", bytesToHex(encryption_key));
+
+                }, 
+                onComplete: function(instance){
+                    RealmConfiguration.$init.overload('java.io.File', 'java.lang.String', '[B', 'long', 'io.realm.RealmMigration', 'boolean', 'io.realm.internal.OsRealmConfig$Durability', 'io.realm.internal.RealmProxyMediator', 'io.realm.rx.RxObservableFactory', 'io.realm.coroutines.FlowFactory', 'io.realm.Realm$Transaction', 'boolean', 'io.realm.CompactOnLaunchCallback', 'boolean', 'long', 'boolean', 'boolean').implementation = function(arg1)
+                    {
+                        console.log("[==] Realm onComplete Finished..")
+                        
+                    }
+                }
+                   
+            });
+        }
+    });
+}
+```
 
 ### Internal Storage
 
@@ -254,7 +316,7 @@ You can use stored keys in one of two modes:
 
 2. Users are authorized to use a specific cryptographic operation that is associated with one key. In this mode, users must request a separate authorization for each operation that involves the key. Currently, fingerprint authentication is the only way to request such authorization.
 
-The level of security afforded by the Android KeyStore depends on its implementation, which depends on the device. Most modern devices offer a [hardware-backed KeyStore implementation](0x05d-Testing-Data-Storage.md#hardware-backed-android-keyStore): keys are generated and used in a Trusted Execution Environment (TEE) or a Secure Element (SE), and the operating system can't access them directly. This means that the encryption keys themselves can't be easily retrieved, even from a rooted device. You can verify hardware-backed keys with [Key Attestation](0x05d-Testing-Data-Storage.md#key-attestation). You can determine whether the keys are inside the secure hardware by checking the return value of the `isInsideSecureHardware` method, which is part of the [`KeyInfo` class](https://developer.android.com/reference/android/security/keystore/KeyInfo.html "Class KeyInfo").
+The level of security afforded by the Android KeyStore depends on its implementation, which depends on the device. Most modern devices offer a [hardware-backed KeyStore implementation](#hardware-backed-android-keystore): keys are generated and used in a Trusted Execution Environment (TEE) or a Secure Element (SE), and the operating system can't access them directly. This means that the encryption keys themselves can't be easily retrieved, even from a rooted device. You can verify hardware-backed keys with [Key Attestation](#key-attestation). You can determine whether the keys are inside the secure hardware by checking the return value of the `isInsideSecureHardware` method, which is part of the [`KeyInfo` class](https://developer.android.com/reference/android/security/keystore/KeyInfo.html "Class KeyInfo").
 
 >Note that the relevant KeyInfo indicates that secret keys and HMAC keys are insecurely stored on several devices despite private keys being correctly stored on the secure hardware.
 
@@ -316,7 +378,7 @@ In the above JSON snippet, the keys have the following meaning:
 
 > Note: The `sig` is generated by concatenating `authData` and `clientDataHash` (challenge sent by the server) and signing through the credential private key using the `alg` signing algorithm. The same is verified at the server-side by using the public key in the first certificate.
 
-For more understanding on the implementation guidelines, you can refer to [Google Sample Code](https://github.com/googlesamples/android-key-attestation/blob/master/server/src/main/java/com/android/example/KeyAttestationExample.java "Google Sample Code For Android Key Attestation").
+For more understanding on the implementation guidelines, you can refer to [Google Sample Code](https://github.com/google/android-key-attestation/blob/master/src/main/java/com/android/example/KeyAttestationExample.java "Google Sample Code For Android Key Attestation").
 
 For the security analysis perspective, the analysts may perform the following checks for the secure implementation of Key Attestation:
 
@@ -383,7 +445,7 @@ Storing a Key - from most secure to least secure:
 
 #### Storing Keys Using Hardware-backed Android KeyStore
 
-You can use the [hardware-backed Android KeyStore](0x05d-Testing-Data-Storage.md#hardware-backed-android-keystore) if the device is running Android 7.0 (API level 24) and above with available hardware component (Trusted Execution Environment (TEE) or a Secure Element (SE)). You can even verify that the keys are hardware-backed by using the guidelines provided for [the secure implementation of Key Attestation](0x05d-Testing-Data-Storage.md#key-attestation). If a hardware component is not available and/or support for Android 6.0 (API level 23) and below is required, then you might want to store your keys on a remote server and make them available after authentication.
+You can use the [hardware-backed Android KeyStore](#hardware-backed-android-keystore) if the device is running Android 7.0 (API level 24) and above with available hardware component (Trusted Execution Environment (TEE) or a Secure Element (SE)). You can even verify that the keys are hardware-backed by using the guidelines provided for [the secure implementation of Key Attestation](#key-attestation). If a hardware component is not available and/or support for Android 6.0 (API level 23) and below is required, then you might want to store your keys on a remote server and make them available after authentication.
 
 #### Storing Keys on the Server
 
