@@ -5,7 +5,10 @@
 └────────────────┘
                            
     MastgTest_reversed.java
-    ❯❱ [1mrules.mastg-android-object-deserialization[0m
-          [MASVS-CODE-4] The application make use of Object deserialization in the code.
-                                                                                        
-           46┆ Object untrustedObject = ois.readObject();
+    ❯❱rules.mastg-android-object-deserialization
+          [MASVS-CODE-4] The application make use of Object deserialization in the
+          code.                                                                   
+                                                                                  
+          107┆ ObjectInputStream ois = new ObjectInputStream(new
+               ByteArrayInputStream(serializedPayload));        
+          108┆ Object untrustedObject = ois.readObject();
