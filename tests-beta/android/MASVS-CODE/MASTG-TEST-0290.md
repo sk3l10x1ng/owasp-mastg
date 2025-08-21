@@ -8,13 +8,13 @@ profiles: [L1, L2]
 ---
 
 ## Overview
-Enforced updates on Android occur when an application requires users to install the latest version before they can continue using it. This behavior is commonly implemented via the Google Play Core In-App Update API using the Immediate update type withvalue `1`.  
+Enforced updates on Android occur when an application requires users to install the latest version before they can continue using it. This behavior is commonly implemented via the Google Play Core In-App Update API using the Immediate update type with a value `1`.  
 
 When the Immediate update flow is triggered, the application blocks access to its functionality until the update is fully downloaded and installed.
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0110 on codebase for usages of the calls to the Play Core in-app update API, specifically `startUpdateFlowForResult`, that are configured with the integer value, `1`.
+1. Run a static analysis tool such as @MASTG-TOOL-0110 on codebase for usages of the calls to the Play Core in-app update API, specifically `startUpdateFlowForResult`, that are configured with the integer value `1`.
 
 ## Observation
 
