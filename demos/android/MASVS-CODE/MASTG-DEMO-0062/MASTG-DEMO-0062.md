@@ -9,7 +9,7 @@ profiles: [L1, L2]
 
 ### Sample
 
-The follwoing code implements immediate in-app updates using the Google Play Core API by calling `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1)`.
+The following code implements immediate in-app updates using the Google Play Core API by calling `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1)`.
 
 ### Steps
 
