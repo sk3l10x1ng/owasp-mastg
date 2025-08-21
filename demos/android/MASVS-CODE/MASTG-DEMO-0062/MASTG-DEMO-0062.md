@@ -27,4 +27,4 @@ The output file shows usages of the Google Play Core API enforcing immediate upd
 
 ### Evaluation
 
-The test fails because the app forces users to update immediately and does not provide a fallback. 
+The test fails because the app forces users to update immediately and does not provide a fallback.
