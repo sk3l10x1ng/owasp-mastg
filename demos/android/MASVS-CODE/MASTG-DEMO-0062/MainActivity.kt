@@ -39,24 +39,13 @@ class MainActivity : ComponentActivity() {
         appUpdateResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
         ) { result ->
-            // This callback is triggered when the update flow UI (the full-screen update prompt) is closed.
-            // We inspect the `result.resultCode` to determine what action the user took.
-
-            // If the user accepts the update, the result code will be `Activity.RESULT_OK`.
-            // If the user cancels the update (e.g., by pressing the back button), the result code
-            // will be `Activity.RESULT_CANCELED`. Other errors have different codes.
-            // Therefore, checking for `!= Activity.RESULT_OK` catches all non-successful outcomes.
+            
             if (result.resultCode != Activity.RESULT_OK) {
                 Log.e(
                     "MainActivity",
                     "Update flow was cancelled or failed! Result code: ${result.resultCode}. Re-initiating."
                 )
 
-                // *** ENFORCEMENT ACTION ***
-                // To ensure the user cannot proceed without updating, we immediately
-                // re-trigger the update check. This creates an "enforcement loop" that
-                // effectively blocks the user from accessing the app's main content
-                // until they accept the mandatory update.
                 mastgTest.checkForUpdate(this, appUpdateResultLauncher)
 
             } else {
@@ -84,9 +73,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // *** THE SECOND LAYER OF ENFORCEMENT ***
-        // This ensures a mandatory update isn't bypassed by the user backgrounding
-        // and then returning to the app. It brings the update flow back to the foreground.
+       
         if (::mastgTest.isInitialized) {
             mastgTest.resumeUpdateIfInProgress(this, appUpdateResultLauncher)
         }
