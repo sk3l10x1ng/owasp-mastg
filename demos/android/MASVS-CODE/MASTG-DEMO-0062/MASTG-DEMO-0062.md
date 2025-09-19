@@ -4,7 +4,6 @@ title: Enforced Immediate Updates with Play Core API detected by semgrep
 id: MASTG-DEMO-0062
 code: [kotlin]
 test: MASTG-TEST-0290
-profiles: [L1, L2]
 ---
 
 ### Sample
