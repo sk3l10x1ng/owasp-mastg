@@ -10,6 +10,8 @@ test: MASTG-TEST-0290
 
 The following code implements immediate in-app updates using the Google Play Core API by calling `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1)`.
 
+{{ MastgTest.kt # MastgTest_reversed.java }}
+
 ### Steps
 
 Let's run @MASTG-TOOL-0110 rules against the sample code.
