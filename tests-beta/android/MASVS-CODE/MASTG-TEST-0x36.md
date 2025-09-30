@@ -9,7 +9,7 @@ profiles: [L2]
 
 ## Overview
 
-Enforced updates on Android occur when users must install the latest version of an application before they are allowed to continue using it. This mechanism is typically implemented through the [Google Play Core In-App Update API](https://developer.android.com/guide/playcore/in-app-updates/kotlin-java), using the Immediate update type (value `1`). When this flow is triggered, the application restricts access to its functionality until the update has been successfully downloaded and installed.
+The goal of this test is to verify whether the application enforces updates in a way that blocks usage until the latest version is installed. This is typically achieved using the [Google Play Core In-App Update API](https://developer.android.com/guide/playcore/in-app-updates/kotlin-java) with the Immediate update type (value `1`). The test involves exercising the application when an update is available and observing whether access to functionality is restricted until the update has been successfully downloaded and installed.
 
 ## Steps
 
