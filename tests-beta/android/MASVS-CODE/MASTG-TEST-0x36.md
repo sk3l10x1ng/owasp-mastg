@@ -1,5 +1,5 @@
 ---
-title: Enforced Application Updates
+title: Mandatory In-App Update Enforcement on Android
 platform: android
 id: MASTG-TEST-0x36
 type: [static]
@@ -9,7 +9,7 @@ profiles: [L2]
 
 ## Overview
 
-Enforced updates on Android occur when an application requires users to install the latest version before they can continue using it. This behavior is commonly implemented via the Google Play Core In-App Update API using the Immediate update type with a value `1`. When the Immediate update flow is triggered, the application blocks access to its functionality until the update is fully downloaded and installed.
+Enforced updates on Android occur when users must install the latest version of an application before they are allowed to continue using it. This mechanism is typically implemented through the [Google Play Core In-App Update API](https://developer.android.com/guide/playcore/in-app-updates/kotlin-java), using the Immediate update type (value `1`). When this flow is triggered, the application restricts access to its functionality until the update has been successfully downloaded and installed.
 
 ## Steps
 
@@ -17,8 +17,8 @@ Enforced updates on Android occur when an application requires users to install 
 
 ## Observation
 
-The output contains usage of the application calls `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1).build()`. This is the exact signature for triggering a mandatory, non-cancellable update flow.
+The output should contains usage of the application calls `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1).build()`. This is the exact signature for triggering a mandatory, non-cancellable update flow.
 
 ## Evaluation
 
-The test fails if the app does not enforce updates and still allows users to skip or ignore them. This means users can continue running old or vulnerable versions of the app, which may expose them to security risks.
+The test fails if the app does not enforce updates and still allows users to skip or ignore them.
