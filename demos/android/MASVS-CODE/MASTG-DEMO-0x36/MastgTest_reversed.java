@@ -1,6 +1,5 @@
 package org.owasp.mastestapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,7 +17,7 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
 /* compiled from: MastgTest.kt */
-@Metadata(d1 = {"\u00000\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0007\u0018\u00002\u00020\u0001B\u000f\u0012\u0006\u0010\u0002\u001a\u00020\u0003¢\u0006\u0004\b\u0004\u0010\u0005J\u001c\u0010\b\u001a\u00020\t2\u0006\u0010\n\u001a\u00020\u000b2\f\u0010\f\u001a\b\u0012\u0004\u0012\u00020\u000e0\rJ\u001c\u0010\u000f\u001a\u00020\t2\u0006\u0010\n\u001a\u00020\u000b2\f\u0010\f\u001a\b\u0012\u0004\u0012\u00020\u000e0\rR\u000e\u0010\u0006\u001a\u00020\u0007X\u0082\u0004¢\u0006\u0002\n\u0000¨\u0006\u0010"}, d2 = {"Lorg/owasp/mastestapp/MastgTest;", "", "context", "Landroid/content/Context;", "<init>", "(Landroid/content/Context;)V", "appUpdateManager", "Lcom/google/android/play/core/appupdate/AppUpdateManager;", "checkForUpdate", "", "activity", "Landroid/app/Activity;", "appUpdateResultLauncher", "Landroidx/activity/result/ActivityResultLauncher;", "Landroidx/activity/result/IntentSenderRequest;", "resumeUpdateIfInProgress", "app_debug"}, k = 1, mv = {2, 0, 0}, xi = 48)
+@Metadata(d1 = {"\u0000*\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0007\u0018\u00002\u00020\u0001B\u000f\u0012\u0006\u0010\u0002\u001a\u00020\u0003¢\u0006\u0004\b\u0004\u0010\u0005J\u0014\u0010\b\u001a\u00020\t2\f\u0010\n\u001a\b\u0012\u0004\u0012\u00020\f0\u000bJ\u0014\u0010\r\u001a\u00020\t2\f\u0010\n\u001a\b\u0012\u0004\u0012\u00020\f0\u000bR\u000e\u0010\u0006\u001a\u00020\u0007X\u0082\u0004¢\u0006\u0002\n\u0000¨\u0006\u000e"}, d2 = {"Lorg/owasp/mastestapp/MastgTest;", "", "context", "Landroid/content/Context;", "<init>", "(Landroid/content/Context;)V", "appUpdateManager", "Lcom/google/android/play/core/appupdate/AppUpdateManager;", "checkForUpdate", "", "appUpdateResultLauncher", "Landroidx/activity/result/ActivityResultLauncher;", "Landroidx/activity/result/IntentSenderRequest;", "resumeUpdateIfInProgress", "app_debug"}, k = 1, mv = {2, 0, 0}, xi = 48)
 /* loaded from: classes3.dex */
 public final class MastgTest {
     public static final int $stable = 8;
@@ -31,24 +30,23 @@ public final class MastgTest {
         this.appUpdateManager = appUpdateManagerCreate;
     }
 
-    public final void checkForUpdate(Activity activity, final ActivityResultLauncher<IntentSenderRequest> appUpdateResultLauncher) {
-        Intrinsics.checkNotNullParameter(activity, "activity");
+    public final void checkForUpdate(final ActivityResultLauncher<IntentSenderRequest> appUpdateResultLauncher) {
         Intrinsics.checkNotNullParameter(appUpdateResultLauncher, "appUpdateResultLauncher");
         Log.d("MastgTest", "Checking for an update...");
         Task appUpdateInfoTask = this.appUpdateManager.getAppUpdateInfo();
         Intrinsics.checkNotNullExpressionValue(appUpdateInfoTask, "getAppUpdateInfo(...)");
-        final Function1 function1 = new Function1() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda2
+        final Function1 function1 = new Function1() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             public final Object invoke(Object obj) {
                 return MastgTest.checkForUpdate$lambda$0(this.f$0, appUpdateResultLauncher, (AppUpdateInfo) obj);
             }
         };
-        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda3
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda1
             @Override // com.google.android.gms.tasks.OnSuccessListener
             public final void onSuccess(Object obj) {
                 MastgTest.checkForUpdate$lambda$1(function1, obj);
             }
-        }).addOnFailureListener(new OnFailureListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda4
+        }).addOnFailureListener(new OnFailureListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda2
             @Override // com.google.android.gms.tasks.OnFailureListener
             public final void onFailure(Exception exc) {
                 MastgTest.checkForUpdate$lambda$2(exc);
@@ -89,17 +87,16 @@ public final class MastgTest {
         tmp0.invoke(p0);
     }
 
-    public final void resumeUpdateIfInProgress(Activity activity, final ActivityResultLauncher<IntentSenderRequest> appUpdateResultLauncher) {
-        Intrinsics.checkNotNullParameter(activity, "activity");
+    public final void resumeUpdateIfInProgress(final ActivityResultLauncher<IntentSenderRequest> appUpdateResultLauncher) {
         Intrinsics.checkNotNullParameter(appUpdateResultLauncher, "appUpdateResultLauncher");
         Task<AppUpdateInfo> appUpdateInfo = this.appUpdateManager.getAppUpdateInfo();
-        final Function1 function1 = new Function1() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda0
+        final Function1 function1 = new Function1() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             public final Object invoke(Object obj) {
                 return MastgTest.resumeUpdateIfInProgress$lambda$3(this.f$0, appUpdateResultLauncher, (AppUpdateInfo) obj);
             }
         };
-        appUpdateInfo.addOnSuccessListener(new OnSuccessListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda1
+        appUpdateInfo.addOnSuccessListener(new OnSuccessListener() { // from class: org.owasp.mastestapp.MastgTest$$ExternalSyntheticLambda4
             @Override // com.google.android.gms.tasks.OnSuccessListener
             public final void onSuccess(Object obj) {
                 MastgTest.resumeUpdateIfInProgress$lambda$4(function1, obj);

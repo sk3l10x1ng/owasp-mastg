@@ -1,5 +1,5 @@
 ---
-title: Mandatory In-App Update Enforcement on Android
+title: Enforcing Mandatory In-App Updates
 platform: android
 id: MASTG-TEST-0x36
 type: [static]
@@ -9,7 +9,7 @@ profiles: [L2]
 
 ## Overview
 
-The goal of this test is to verify whether the application enforces updates in a way that blocks usage until the latest version is installed. This is typically achieved using the [Google Play Core In-App Update API](https://developer.android.com/guide/playcore/in-app-updates/kotlin-java) with the Immediate update type (value `1`). The test involves exercising the application when an update is available and observing whether access to functionality is restricted until the update has been successfully downloaded and installed.
+The goal of this test is to verify whether the application enforces updates in a way that blocks usage until the latest version is installed. This is typically achieved using the [Google Play Core In-App Update API](https://developer.android.com/guide/playcore/in-app-updates/kotlin-java) by invoking `startUpdateFlowForResult` with an Immediate update type option `AppUpdateType.IMMEDIATE` or value `1`. This configuration initiates a non-cancellable, blocking update flow. The test should involve launching the app when an update is available and verifying that access to the app’s functionality remains restricted until the update has been successfully downloaded and installed.
 
 ## Steps
 
@@ -17,7 +17,7 @@ The goal of this test is to verify whether the application enforces updates in a
 
 ## Observation
 
-The output should contains usage of the application calls `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1).build()`. This is the exact signature for triggering a mandatory, non-cancellable update flow.
+The output should contain the locations where `startUpdateFlowForResult` with `AppUpdateOptions.newBuilder(1).build()` is called.
 
 ## Evaluation
 

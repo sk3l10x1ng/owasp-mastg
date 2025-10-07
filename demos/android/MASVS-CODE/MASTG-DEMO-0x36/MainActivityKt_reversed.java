@@ -39,7 +39,7 @@ public final class MainActivityKt {
 
     public static final void MainScreen(final String displayString, final Function0<Unit> function0, Composer $composer, final int $changed, final int i) {
         Composer $composer2 = $composer.startRestartGroup(-958245146);
-        ComposerKt.sourceInformation($composer2, "C(MainScreen)101@4482L280,101@4442L320:MainActivity.kt#vyvp3i");
+        ComposerKt.sourceInformation($composer2, "C(MainScreen)101@4458L280,101@4418L320:MainActivity.kt#vyvp3i");
         int $dirty = $changed;
         int i2 = i & 1;
         if (i2 != 0) {
@@ -73,7 +73,7 @@ public final class MainActivityKt {
                 }
 
                 public final void invoke(Composer $composer3, int $changed2) {
-                    ComposerKt.sourceInformation($composer3, "C102@4492L264:MainActivity.kt#vyvp3i");
+                    ComposerKt.sourceInformation($composer3, "C102@4468L264:MainActivity.kt#vyvp3i");
                     if (($changed2 & 11) != 2 || !$composer3.getSkipping()) {
                         TextKt.m2715Text4IGK_g(displayString, TestTagKt.testTag(PaddingKt.m681padding3ABfNKs(Modifier.INSTANCE, Dp.m6664constructorimpl(16)), MainActivityKt.MASTG_TEXT_TAG), Color.INSTANCE.m4219getWhite0d7_KjU(), TextUnitKt.getSp(16), (FontStyle) null, (FontWeight) null, (FontFamily) FontFamily.INSTANCE.getMonospace(), 0L, (TextDecoration) null, (TextAlign) null, 0L, 0, false, 0, 0, (Function1<? super TextLayoutResult, Unit>) null, (TextStyle) null, $composer3, 3504, 0, 130992);
                         return;

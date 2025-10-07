@@ -1,6 +1,5 @@
 package org.owasp.mastestapp
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -31,28 +30,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Initialize the class that contains the update logic.
         mastgTest = MastgTest(applicationContext)
 
-        // *** THE CORE ENFORCEMENT LOGIC TO PREVENT BYPASSING THE UPDATE ***
-        // This launcher handles the result of the update flow initiated by `startUpdateFlowForResult`.
         appUpdateResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
         ) { result ->
-            
-            if (result.resultCode != Activity.RESULT_OK) {
+            if (result.resultCode != RESULT_OK) {
                 Log.e(
                     "MainActivity",
                     "Update flow was cancelled or failed! Result code: ${result.resultCode}. Re-initiating."
                 )
-
-                mastgTest.checkForUpdate(this, appUpdateResultLauncher)
-
+                // The unused 'this' parameter is now removed.
+                mastgTest.checkForUpdate(appUpdateResultLauncher)
             } else {
-                // This block is executed if `result.resultCode == Activity.RESULT_OK`.
-                // It means the user has accepted the update. The Google Play Store is now
-                // handling the download and installation. The app will be automatically
-                // restarted by Play after the update is complete. No further action is needed here.
                 Log.d("MainActivity", "Update accepted. The update is now in progress.")
             }
         }
@@ -61,21 +51,21 @@ class MainActivity : ComponentActivity() {
             MainScreen(
                 displayString = "App is running. Checking for mandatory updates...",
                 onStartClick = {
-                    // Manually trigger a check for testing purposes.
-                    mastgTest.checkForUpdate(this, appUpdateResultLauncher)
+                    // The unused 'this' parameter is now removed.
+                    mastgTest.checkForUpdate(appUpdateResultLauncher)
                 }
             )
         }
 
-        // Trigger the initial update check when the Activity is created.
-        mastgTest.checkForUpdate(this, appUpdateResultLauncher)
+        // The unused 'this' parameter is now removed.
+        mastgTest.checkForUpdate(appUpdateResultLauncher)
     }
 
     override fun onResume() {
         super.onResume()
-       
         if (::mastgTest.isInitialized) {
-            mastgTest.resumeUpdateIfInProgress(this, appUpdateResultLauncher)
+            // The unused 'this' parameter is now removed.
+            mastgTest.resumeUpdateIfInProgress(appUpdateResultLauncher)
         }
     }
 }

@@ -1,6 +1,6 @@
 ---
 platform: android
-title: Enforced Immediate Updates with Play Core API detected by semgrep
+title: Enforced Immediate Updates with Play Core API detected using semgrep
 id: MASTG-DEMO-0x36
 code: [kotlin]
 test: MASTG-TEST-0x336
