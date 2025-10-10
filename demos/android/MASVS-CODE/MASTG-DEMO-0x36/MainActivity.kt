@@ -23,14 +23,14 @@ const val MASTG_TEXT_TAG = "mastgTestText"
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var mastgTest: MastgTest
+    private val mastgTest by lazy { MastgTest(applicationContext) }
     private lateinit var appUpdateResultLauncher: ActivityResultLauncher<IntentSenderRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        mastgTest = MastgTest(applicationContext)
+        // mastgTest = MastgTest(applicationContext)
 
         appUpdateResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
@@ -63,10 +63,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (::mastgTest.isInitialized) {
+        // if (::mastgTest.isInitialized) {
             // The unused 'this' parameter is now removed.
             mastgTest.resumeUpdateIfInProgress(appUpdateResultLauncher)
-        }
+       // }
     }
 }
 
