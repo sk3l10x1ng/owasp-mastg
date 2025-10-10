@@ -8,6 +8,9 @@ title: Testing Enforced Updating
 masvs_v1_levels:
 - L2
 profiles: [L2]
+status: deprecated
+covered_by: [MASTG-TEST-0x36]
+deprecation_note: New version available in MASTG V2
 ---
 
 ## Overview
@@ -84,7 +87,7 @@ protected void onResume() {
 }
 ```
 
->Source: [https://developer.android.com/guide/app-bundle/in-app-updates](https://developer.android.com/guide/app-bundle/in-app-updates "Support in-app updates")
+> Source: [https://developer.android.com/guide/app-bundle/in-app-updates](https://developer.android.com/guide/app-bundle/in-app-updates "Support in-app updates")
 
 ## Dynamic analysis
 
