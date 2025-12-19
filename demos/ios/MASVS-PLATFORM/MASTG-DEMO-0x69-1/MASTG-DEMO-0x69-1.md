@@ -10,7 +10,7 @@ test: MASTG-TEST-0069
 
 The code snippet below shows sample entitlements declared in the provisioning profile. The embedded.mobileprovision file contains multiple entitlements that the app uses to request special permissions.
 
-{{ decoded.mobileprovision.xml }}
+{{ embedded.mobileprovision }}
 
 
 ### Steps
