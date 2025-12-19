@@ -1,7 +1,7 @@
 ---
 platform: ios
 title: Declaring Dangerous Permissions in entitlements.plist
-code: [xml, swift]
+code: [swift]
 id: MASTG-DEMO-0x69-1
 test: MASTG-TEST-0069
 ---
