@@ -86,7 +86,7 @@ This prints the entitlements plist to stdout:
 </plist>
 ```
 
-## Manual Source Code Review
+## Using Manual Source Code Review
 
 Perform a manual source code review to verify how permissions and capabilities are used in the app. Examine the code to ensure that declared permissions match their actual usage and that no sensitive data is unnecessarily exposed.
 

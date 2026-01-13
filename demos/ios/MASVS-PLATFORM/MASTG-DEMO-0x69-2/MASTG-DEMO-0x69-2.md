@@ -1,8 +1,8 @@
 ---
 platform: ios
-title: Declaring Dangerous Permissions in entitlements.plist
+title: Declaring Sensitive Permissions in entitlements.plist
 code: [swift]
-id: MASTG-DEMO-0x69-1
+id: MASTG-DEMO-0x69-2
 test: MASTG-TEST-0069
 ---
 
@@ -10,13 +10,13 @@ test: MASTG-TEST-0069
 
 The code snippet below shows sample code that accesses protected resources requiring entitlements. The app's `entitlements.plist` file declares multiple permissions that the app uses to request special access.
 
-{{ MastgTest.swift }}
+{{ ../MASTG-DEMO-0x69/MastgTest.swift }}
 
 
 ### Steps
 
-1. Unzip the app package and locate the main binary file (@MASTG-TECH-0058), which in this case is `./Payload/MASTestApp.app/MASTestApp`.
-2. Run `run.sh` (@MASTG-TECH-0111) to extract the entitlements.
+1. Unzip the app package and locate the main app binary (@MASTG-TECH-0058), which in this case is `./Payload/MASTestApp.app/MASTestApp`.
+2. Run `run.sh` to extract the entitlements using @MASTG-TECH-0111.
 
 {{ run.sh }}
 
@@ -28,4 +28,4 @@ The output reveals the entitlements declared in the app's entitlements.plist fil
 
 ### Evaluation
 
-The test fails because the app declares multiple entitlements that may be excessive for its core functionality.
+The test fails because the app declares sensitive entitlements that is excessive for its core functionality.
