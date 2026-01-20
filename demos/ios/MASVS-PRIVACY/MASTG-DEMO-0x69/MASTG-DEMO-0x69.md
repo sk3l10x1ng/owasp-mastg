@@ -3,7 +3,7 @@ platform: ios
 title: Declaring Sensitive Permissions in Info.plist
 id: MASTG-DEMO-0x69
 code: [swift]
-test: MASTG-TEST-0069
+test: MASTG-TEST-0x69
 ---
 
 ### Sample

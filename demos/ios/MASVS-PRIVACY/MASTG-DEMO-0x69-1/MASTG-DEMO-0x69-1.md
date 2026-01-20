@@ -3,7 +3,7 @@ platform: ios
 title: Declaring Sensitive Permissions in embedded.mobileprovision
 code: [swift]
 id: MASTG-DEMO-0x69-1
-test: MASTG-TEST-0069
+test: MASTG-TEST-0x69-1
 ---
 
 ### Sample

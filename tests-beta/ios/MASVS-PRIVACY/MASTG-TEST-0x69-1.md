@@ -1,10 +1,10 @@
 ---
 title: Entitlements in Embedded Provisioning Profile
 platform: ios
-id: MASTG-TEST-0313
+id: MASTG-TEST-0x69-1
 type: [static]
 weakness: MASWE-0117
-profiles: [P]
+profiles: [L1, L2]
 ---
 
 ## Overview
