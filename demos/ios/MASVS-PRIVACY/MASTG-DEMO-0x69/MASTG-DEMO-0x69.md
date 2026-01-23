@@ -14,7 +14,6 @@ The code snippet below shows sample code that accesses protected resources requi
 
 {{ MastgTest.swift }}
 
-
 ### Steps
 
 1. Extract the app package content using (@MASTG-TOOL-0126) and locate the `Info.plist` file, which in located at `./Payload/MASTestApp.app/Info.plist`.

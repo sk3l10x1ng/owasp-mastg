@@ -12,7 +12,6 @@ The code snippet below shows sample code that accesses protected resources requi
 
 {{ ../MASTG-DEMO-0x69/MastgTest.swift }}
 
-
 ### Steps
 
 1. Unzip the app package and locate the main app binary (@MASTG-TECH-0058), which in this case is `./Payload/MASTestApp.app/MASTestApp`.

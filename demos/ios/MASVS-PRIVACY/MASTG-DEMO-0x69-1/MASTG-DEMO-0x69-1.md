@@ -13,6 +13,7 @@ The code snippet below shows sample entitlements declared in the provisioning pr
 {{ ../MASTG-DEMO-0x69/embedded.mobileprovision }}
 
 ### Steps
+
 1. Sign the `.ipa` using @MASTG-TECH-0092.
 2. Unzip the app package (@MASTG-TECH-0058) and locate the provisioning profile at `./Payload/MASTestApp.app/embedded.mobileprovision`.
 3. Run the `run.sh` script to decode the binary formatted profile into a readable XML format using @MASTG-TECH-0x69.
