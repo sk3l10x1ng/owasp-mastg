@@ -10,9 +10,9 @@ test: MASTG-TEST-0x69
 
 The code snippet below shows sample code that accesses protected resources requiring purpose strings. The `Info.plist` file declares multiple usage descriptions that the app uses to request permissions.
 
-{{ Info.plist }}
-
 {{ MastgTest.swift }}
+
+{{ Info.plist }}
 
 ### Steps
 
