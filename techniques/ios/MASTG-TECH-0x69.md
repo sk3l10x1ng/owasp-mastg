@@ -83,16 +83,16 @@ This prints the entitlements plist to stdout:
 </plist>
 ```
 
-## Manual Source Code Review
+## Reviewing Permission Usage in Source Code
 
 Perform a manual source code review to verify how permissions and capabilities are used in the app. Examine the code to ensure that declared permissions match their actual usage and that no sensitive data is unnecessarily exposed.
 
 When reviewing source code, check for:
 
-- Whether declared purpose strings in `Info.plist` correspond to actual permission requests in the code
-- Whether the app properly checks authorization status before accessing protected resources
-- Whether permission-related data flows are secure and not unnecessarily logged or transmitted
-- Whether the app respects user preferences when accessing sensitive features
+- Whether declared purpose strings in `Info.plist` correspond to actual permission requests in the code.
+- Whether the app properly checks authorization status before accessing protected resources.
+- Whether permission related data flows are secure and not unnecessarily logged or transmitted.
+- Whether the app verifies user preferences when accessing sensitive features.
 
 Look for common authorization patterns in iOS frameworks:
 
@@ -165,7 +165,7 @@ if (ObjC.available) {
 Run the script:
 
 ```bash
-frida -U -f com.example.app -l permission_tracer.js
+frida -U -f com.example.app -l script.js
 ```
 
 The output shows which permission APIs are called during app execution, helping verify that declared permissions match actual runtime behavior.

@@ -20,7 +20,7 @@ The following sample code below requests access to protected resources requiring
 4. Interact with the app to trigger permission requests (e.g., tap **Request All Permissions** button).
 5. Stop the script by pressing `Ctrl+C`.
 
-{{ run.sh # frida_permission_tracer.js }}
+{{ run.sh # script.js }}
 
 ### Observation
 
@@ -34,4 +34,16 @@ The output reveals runtime permission API calls including:
 
 ### Evaluation
 
-The test fails because the app requests multiple sensitive permissions (Location, Camera, Contacts, Calendar, etc.) at runtime that may be excessive for its core functionality. The dynamic analysis confirms that the statically declared permissions in Info.plist and entitlements are actually being requested during app execution.
+The test fails because the app requests excessive permissions at runtime not justified by its core functionality. The output confirms the following permissions are actively requested and granted:
+
+- **Location** — requests both `WhenInUse` and `Always` authorization
+- **Camera** — granted access
+- **Microphone** — granted access
+- **Contacts** — granted access
+- **Calendar** — granted access
+- **HealthKit** — granted access
+- **Motion** — granted access
+- **PhotoLibrary** — granted access
+- **Notifications** — granted access
+
+This confirms that the statically declared permissions in `Info.plist` and entitlements are actually exercised during app execution.

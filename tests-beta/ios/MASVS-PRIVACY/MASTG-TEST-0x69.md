@@ -9,34 +9,20 @@ profiles:  [L1, L2]
 
 ## Overview
 
-iOS apps declare permissions using purpose strings in `Info.plist` to explain why they need access to protected resources (camera, location, contacts, health data etc). Since iOS 10, each resource access requires a purpose string (ending in `UsageDescription`).
+If an app declares purpose strings for permissions that are not justified by its core functionality, it gains unnecessary access to sensitive user data such as location, health records, contacts, or camera. This can lead to privacy violations, excessive data collection, or abuse by malicious insiders.
 
-This test checks whether declared purpose strings are appropriate and justified by the app's core functionality. Excessive permissions expose user data and indicate privacy risks of data.
+On iOS, apps must declare purpose strings (keys ending in `UsageDescription`) in `Info.plist` to request access to protected resources. Since iOS 10, each resource access requires a corresponding purpose string. Declaring more purpose strings than necessary indicates the app may be over-privileged, requesting access to data it does not need to function.
 
 ## Steps
 
-1. Extract the app package contents (@MASTG-TECH-0058) and locate the `Info.plist` file at `Payload/<appname>.app/Info.plist`.
-2. Convert the `Info.plist` to a readable format if needed using `plutil` (see @MASTG-TECH-0069).
+1. Extract the app package contents using @MASTG-TECH-0058 and locate the `Info.plist` file at `Payload/<appname>.app/Info.plist`.
+2. Convert the `Info.plist` to a readable format if needed using @MASTG-TECH-0069.
 3. Search for all keys ending with `UsageDescription` to identify all declared purpose strings.
-4. Review the purposes and check if they are justified by the app's core functionality.
 
 ## Observation
 
-The output should contain list of all purpose strings (ending in `UsageDescription`) found in the `Info.plist` file. This provides a clear overview of the app's intended capabilities and access to user data. Common purpose strings include:
-
-- `NSCameraUsageDescription` – Camera access
-- `NSMicrophoneUsageDescription` – Microphone access
-- `NSPhotoLibraryUsageDescription` – Photo library access
-- `NSLocationWhenInUseUsageDescription` – Location while using the app
-- `NSLocationAlwaysUsageDescription` – Continuous location access
-- `NSContactsUsageDescription` – Contacts access
-- `NSCalendarsUsageDescription` – Calendar access
-- `NSHealthShareUsageDescription` – Health data read access
-- `NSHealthUpdateUsageDescription` – Health data write access
-- `NSMotionUsageDescription` – Motion data access
-- `NSBluetoothAlwaysUsageDescription` – Bluetooth access
-- `NSFaceIDUsageDescription` – Face ID access
+The output should contain a list of all purpose strings (keys ending in `UsageDescription`) declared in the app's `Info.plist` file, along with their associated description values.
 
 ## Evaluation
 
-The test fails if the app declares purpose strings that are not justified by its core functionality.
+The test case fails if the app declares purpose strings for permissions that are not justified by its core functionality, indicating excessive access to sensitive user data.

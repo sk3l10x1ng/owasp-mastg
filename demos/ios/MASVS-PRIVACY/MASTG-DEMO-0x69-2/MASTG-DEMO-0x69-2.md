@@ -21,10 +21,17 @@ The code snippet below shows sample code that accesses protected resources requi
 
 ### Observation
 
-The output reveals the entitlements declared in the app's entitlements.plist file.
+The output reveals the entitlements plist extracted from the app binary's code signature, listing all capabilities embedded during the signing process.
 
 {{ output.txt }}
 
 ### Evaluation
 
-The test fails because the app declares sensitive entitlements that is excessive for its core functionality.
+The test fails because the app binary embeds entitlements that are excessive for its core functionality. Specifically:
+
+- `com.apple.developer.healthkit` — health data access
+- `com.apple.developer.homekit` — smart home device control
+- `com.apple.developer.siri` — Siri integration
+- `com.apple.developer.nfc.readersession.formats` — NFC reader access (NDEF, TAG)
+- `com.apple.developer.networking.wifi-info` — Wi-Fi network information
+- `get-task-allow` — debugger attachment (should be disabled in production builds)
