@@ -11,11 +11,11 @@ profiles: [L1, L2]
 
 If an app requests permissions at runtime that are not justified by its core functionality, it may be collecting sensitive user data (location, contacts, camera, notifications) beyond what is necessary. This can lead to privacy violations or indicate hidden data collection behavior not apparent from static analysis alone.
 
-While static analysis (@MASTG-TEST-0x69, @MASTG-TEST-0x69-2) identifies declared permissions and entitlements, dynamic analysis reveals which permissions are actually requested at runtime and under what conditions — exposing cases where declared permissions are exercised unnecessarily or without proper user context.
+Dynamic analysis reveals which permissions are actually requested at runtime and under what conditions — exposing cases where declared permissions are exercised unnecessarily or without proper user context.
 
 ## Steps
 
-1. Use @MASTG-TECH-0062 to hook iOS permission APIs such as `CLLocationManager.requestWhenInUseAuthorization`, `AVCaptureDevice.requestAccessForMediaType:completionHandler:`, `CNContactStore.requestAccessForEntityType:completionHandler:`, and `UNUserNotificationCenter.requestAuthorizationWithOptions:completionHandler:`.
+1. Use @MASTG-TOOL-0039 to hook iOS permission APIs.
 2. Interact with the app to trigger permission requests and observe the hooked API calls.
 
 ## Observation

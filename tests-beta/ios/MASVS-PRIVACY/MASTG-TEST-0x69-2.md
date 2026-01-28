@@ -16,7 +16,7 @@ On iOS, every signed app binary includes entitlements embedded during the code s
 ## Steps
 
 1. Extract the app package contents using @MASTG-TECH-0058 and locate the main app binary at `Payload/<appname>.app/<appname>`.
-2. Extract the entitlements from the signed binary using @MASTG-TECH-0069.
+2. Extract the entitlements from the signed binary using @MASTG-TECH-0111.
 
 ## Observation
 

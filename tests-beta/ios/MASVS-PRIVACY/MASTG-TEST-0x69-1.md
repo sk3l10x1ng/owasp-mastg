@@ -17,7 +17,7 @@ On iOS, entitlements are declared in the provisioning profile (`embedded.mobilep
 
 1. Sign the `.ipa` using @MASTG-TECH-0092 (if not already signed).
 2. Extract the app package contents using @MASTG-TECH-0058 and locate the embedded provisioning profile at `Payload/<appname>.app/embedded.mobileprovision`.
-3. Decode the provisioning profile from binary CMS format to XML using @MASTG-TECH-0069 and extract the `Entitlements` dictionary.
+3. Decode the provisioning profile from binary CMS format to XML using @MASTG-TOOL-0063 and extract the `Entitlements` dictionary.
 
 ## Observation
 
